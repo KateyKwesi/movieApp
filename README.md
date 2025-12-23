@@ -17,34 +17,35 @@ It blends **dynamic movie data**, **cinematic visual effects**, and **responsive
 
 The project emphasizes:
 
-- Clean component architecture
-- Performance-optimized data fetching
+- Clean and reusable component architecture
+- Performance-optimized API data fetching
 - Advanced UI effects using modern CSS techniques
 - Scalable and maintainable frontend patterns
 
 ---
 
-## ✨ Features
+## Features
 
 - **Dynamic Movie Backgrounds**  
   High-quality movie backdrops fetched in real time from the TMDB API.
+
+- **Movie Search Functionality**  
+  Search for movies by title with real-time results powered by the TMDB API.
 
 - **Custom Rating Component**  
   Fractional star ratings built from scratch for accurate score representation.
 
 - **Glassmorphism UI Cards**  
-  Frosted-glass cards with gradients, blur effects, and depth.
+  Frosted-glass cards with gradient overlays, blur effects, and depth.
 
 - **Fully Responsive Design**  
   Optimized for mobile, tablet, and desktop screens.
 
-- ⚡ **Fast Development Setup**  
+- **Fast Development Setup**  
   Built with **Vite** for rapid builds and hot module replacement.
 
-- **Efficient Data Fetching**  
-  Powered by **React Query** for caching, background updates, and performance.
-
-- **- and More**
+- **Efficient Data Fetching & Caching**  
+  Powered by **React Query (TanStack Query)** for optimized requests and background updates.
 
 ---
 
