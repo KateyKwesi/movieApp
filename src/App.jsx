@@ -11,7 +11,6 @@ function App() {
     <BrowserRouter>
       <div style={{ height: "100vh", width: "100vw", background: "#282c34" }}>
         <Snowfall />
-        {/* Your app content goes here */}
 
         <div className="bg-slate-950 min-h-screen">
           <Header />
