@@ -1,15 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Calendar, Star, Play, Info, Bookmark } from "lucide-react";
-import { useLocation, Link } from "react-router-dom";
+import {
+  Calendar,
+  Star,
+  Play,
+  Info,
+  Bookmark,
+  ExternalLink,
+} from "lucide-react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import Avatar from "react-avatar";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-export const IdInfo = () => {
+export const MovieIdInfo = () => {
   const TOKEN = import.meta.env.VITE_TMDB_API_KEY;
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { id } = location.state || {};
 
@@ -111,11 +118,9 @@ export const IdInfo = () => {
     }
   };
 
-  console.log(MovieTrailer?.results);
   const Trailer = MovieTrailer?.results.find(
     (trailer) => trailer.name === "Official Trailer"
   );
-  console.log(Trailer);
   return (
     <div className="min-h-screen bg-slate-950 overflow-hidden">
       <div className="relative h-[80vh] md:h-[80vh] w-full overflow-hidden">
@@ -139,7 +144,7 @@ export const IdInfo = () => {
           <div className="text-white w-full flex-col ">
             <Button
               onClick={() => {
-                window.open(`/play/${id}`, "_blank");
+                navigate(`/watch/${id}`);
               }}
               className="w-full bg-amber-50 text-slate-950 mb-3 py-5 border-white/10 hover:bg-amber-50 hover:text-gray-800 hover:border"
             >
@@ -147,11 +152,17 @@ export const IdInfo = () => {
               Watch Now
             </Button>
             <Button
-              className="w-full bg-blue-950/10 font-semibold py-5 border-amber-50/10 hover:text-white hover:bg-gray-950"
+              onClick={() =>
+                window.open(
+                  `https://www.imdb.com/title/${MovieInfo?.imdb_id}`,
+                  "_blank"
+                )
+              }
+              className="w-full bg-blue-950/10 font-semibold py-5 border-amber-50/10 hover:text-black hover:bg-yellow-500"
               variant="outline"
             >
-              <Bookmark />
-              WishList
+              <ExternalLink />
+              View on IMBD
             </Button>
           </div>
           <div className="text-white w-full mt-4 bg-blue-950/10 border border-amber-50/10 rounded-md backdrop-blur-lg shadow-2xl">

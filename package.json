@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iframe-resizer/react": "^5.5.7",
     "@lottiefiles/dotlottie-react": "^0.17.10",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
@@ -23,6 +24,7 @@
     "react": "^19.2.0",
     "react-avatar": "^5.0.4",
     "react-dom": "^19.2.0",
+    "react-multi-carousel": "^2.8.6",
     "react-router-dom": "^7.11.0",
     "react-snowfall": "^2.4.0",
     "react-spinners": "^0.17.0",

@@ -1,20 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchMovies } from "./fetchMovies";
 import { Hero } from "./Hero";
 import { MovieCard } from "./movieCard";
+import { TrendingCard } from "./trendingCard";
+import { TVCard } from "./tvCard";
 export default function Home() {
-  const {
-    data: MoviesDisover,
-    isLoading: DiscoverLoading,
-    error: DiscoverError,
-  } = useQuery({
-    queryKey: ["moviesDiscover"],
-    queryFn: fetchMovies,
-  });
   return (
     <div>
       <Hero />
-      <MovieCard discover={MoviesDisover} />
+      <TrendingCard />
+      <MovieCard />
+      <TVCard />
     </div>
   );
 }

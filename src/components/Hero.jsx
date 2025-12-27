@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
-import { IdInfo } from "./Info";
+import { MovieIdInfo } from "./movieInfo";
 import { Star, Calendar, Play, Info } from "lucide-react";
 import { genreData } from "./genre";
 import { useQuery } from "@tanstack/react-query";
-import { fetchMovies, popular } from "./fetchMovies";
+import { popular } from "./fetchMovies";
 import axios from "axios";
-import { PlayMovie } from "./playMovie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
 export function Hero() {
   const TOKEN = import.meta.env.VITE_TMDB_API_KEY;
   const [count, setCount] = useState(0);
-
+  const navigate = useNavigate();
   const fetchTitle = async () => {
     const res = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}/images`,
@@ -23,11 +24,7 @@ export function Hero() {
     );
     return res.data;
   };
-  const {
-    data: popularMovie,
-    isLoading: popularLoading,
-    error: popularError,
-  } = useQuery({
+  const { data: popularMovie, isLoading: popularLoading } = useQuery({
     queryKey: ["moviespopular", count],
     queryFn: popular,
   });
@@ -53,9 +50,9 @@ export function Hero() {
     if (!ids) return null;
     return genreData.genres
       .filter((genre) => ids.includes(genre.id))
-      .map((genre) => (
+      .map((genre, index) => (
         <div
-          key={genre.id}
+          key={index}
           className="bg-white/10 border border-white/30 px-2 rounded-full
                    transition-all duration-300 ease-in-out hover:bg-white/30
                    shadow-lg text-white flex gap-1.5 items-center"
@@ -66,7 +63,7 @@ export function Hero() {
   };
 
   const handleClicked = () => {
-    window.open(`/play/${movieId}`, "_blank");
+    navigate(`/watch/${movieId}`);
   };
   useEffect(() => {
     if (!popularMovie?.results) return;
@@ -80,11 +77,19 @@ export function Hero() {
     return () => clearInterval(interval);
   }, [popularMovie]);
 
+  if (popularLoading)
+    return (
+      <DotLottieReact
+        src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
+        loop
+        autoplay
+      />
+    );
   return (
     <div className="min-h-screen bg-slate-950">
       <div className="relative h-[80vh] md:h-[80vh] w-full overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center transition-all duration-300"
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original/${popularMovie?.results[count]?.backdrop_path})`,
           }}
@@ -92,10 +97,10 @@ export function Hero() {
 
         <div className="absolute inset-0 bg-linear-to-b from-slate-950/20 via-slate-950/60 to-slate-950"></div>
         <div className=" w-full relative flex h-full items-end">
-          <div className="flex flex-col text-white px-15 gap-5">
+          <div className="flex flex-col text-white  gap-5 px-5">
             <div className="">
               <img
-                className="max-w-80"
+                className="max-w-80 w-30 px-2 sm:w-50"
                 src={titleLogo}
                 alt={`${popularMovie?.results[count]?.title}`}
               />
@@ -116,7 +121,7 @@ export function Hero() {
               {handleGenre()}
             </div>
             <div className="">
-              <p className="text-sm sm:text:md md:text-lg lg:text:xl max-w-[60ch] overflow-hidden leading-relaxed">
+              <p className="text-xs sm:text:md md:text-lg lg:text:xl px-1 max-w-[60ch] overflow-hidden leading-relaxed">
                 {popularMovie?.results[count].overview}
               </p>
             </div>
@@ -136,12 +141,14 @@ export function Hero() {
               </div>
               <div>
                 <Link
-                  to="/Info"
+                  to={`/movieInfo/${popularMovie?.results[count].id}`}
                   state={{ id: popularMovie?.results[count].id }}
                 >
                   <button
                     onClick={() => {
-                      <IdInfo id={popularMovie?.results[count].overview} />;
+                      <MovieIdInfo
+                        id={popularMovie?.results[count].overview}
+                      />;
                     }}
                     className="bg-white/10  px-7 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-white/30 shadow-lg text-white flex gap-1 items-center"
                   >

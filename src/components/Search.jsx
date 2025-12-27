@@ -1,51 +1,53 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { SearchIcon } from "lucide-react";
 import { useState } from "react";
-import { GridLoader } from "react-spinners";
-import { MovieCard } from "./movieCard";
-
-const TOKEN = import.meta.env.VITE_TMDB_API_KEY;
+import { MovieSearch } from "./movieSearch";
+import { TvSearch } from "./tvSearch";
+import { SearchIcon } from "lucide-react";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState(``);
 
-  const SearchMovies = async () => {
-    const res = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&include_adult=false&language=en-US&page=1`,
-      { headers: { Authorization: `Bearer ${TOKEN}` } }
-    );
-    return res.data;
-  };
-  const {
-    data: SearchMovie,
-    isLoading: SearchLoading,
-    error: SearchError,
-  } = useQuery({
-    queryKey: ["search", searchTerm],
-    queryFn: SearchMovies,
-    enabled: !!searchTerm,
-  });
-
   return (
     <div>
-      <div className="pt-50 flex justify-center pb-10 bg-transparent ">
-        <div className="flex relative w-3xl h-10 justify-center  bg-white/10 backdrop-blur-lg rounded-md px-4 shadow-sm ring-1 ring-white/10 ">
-          <SearchIcon className="absolute top-0 w-5 mt-2 left-3 " />
-          <input
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-            }}
-            type="text"
-            placeholder="Search for your favroit"
-            className="  w-full flex-1 bg-transparent px-4 py-3 pl-12 !text-search-text focus:outline-none sm:py-3 sm:pr-3 transition-all duration-500 font-medium placeholder-search-placeholder text-white/80 "
-          />
+      <div>
+        <div className="pt-50 flex justify-center pb-10">
+          <div
+            className="
+      relative flex items-center
+      w-full max-w-2xl h-14
+      bg-slate-900/70
+      backdrop-blur-xl
+      rounded-2xl
+      px-4
+      shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+      ring-1 ring-white/10
+      transition-all duration-300
+      focus-within:bg-slate-900
+      focus-within:ring-amber-400/40
+    "
+          >
+            <SearchIcon className="absolute left-4 w-5 text-white/50" />
+
+            <input
+              type="text"
+              placeholder="Search movies or TV shows"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="
+        w-full
+        bg-transparent
+        pl-10 pr-3
+        text-white
+        placeholder:text-white/40
+        outline-none
+      "
+            />
+          </div>
         </div>
       </div>
-      <div className="flex justify-center">
-        {SearchLoading && <GridLoader color="#ffffff" />}
+      ;
+      <div className="flex  flex-col gap-16">
+        <MovieSearch search={searchTerm} />
+        <TvSearch search={searchTerm} />
       </div>
-      <MovieCard discover={SearchMovie} />
     </div>
   );
 };
