@@ -1,7 +1,6 @@
 {
   "name": "Slateflix",
   "short_name": "Slateflix",
-  "description": "Watch all your favourite movies and tv shows for free.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#020617",
