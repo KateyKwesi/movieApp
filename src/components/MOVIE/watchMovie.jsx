@@ -10,7 +10,9 @@ function WatchMovie() {
     <div className="relative w-full h-screen">
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center text-amber-50 z-10">
-          Loading.....
+          <h1 className="inline-block text-slate-400 text-2xl tracking-widest  font-semibold  m-5 ">
+            LOADING...
+          </h1>
         </div>
       )}
 

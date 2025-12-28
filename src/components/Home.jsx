@@ -1,13 +1,13 @@
 import { Hero } from "./Hero";
-import { MovieCard } from "./movieCard";
+import { MovieCard } from "./MOVIE/movieCard";
 import { TrendingCard } from "./trendingCard";
-import { TVCard } from "./tvCard";
+import { TVCard } from "./TV/tvCard";
 export default function Home() {
   return (
-    <div>
+    <div className="relative bg-slate-950">
       <Hero />
       <TrendingCard />
-      <MovieCard />
+      <MovieCard name={`MOVIES`} />
       <TVCard />
     </div>
   );

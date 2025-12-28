@@ -1,5 +1,6 @@
 import { motion, scale } from "framer-motion";
 import { Star, Play, Info } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export function Card({
@@ -21,13 +22,15 @@ export function Card({
       transition: { ease: `easeIn`, duration: 0.15 },
     },
   };
+
   return (
     <motion.div
       variants={daysChildren}
       whileHover={{ opacity: 1, scale: 1.1 }}
       key={id}
-      transition={{ ease: `easeIn`, duration: 0.8 }}
-      className=" rounded-2xl 
+      transition={{ ease: `easeIn`, duration: 0.2 }}
+      className=" rounded-2xl bg-slate-950 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.15),transparent_60%)]
+
             bg-dark-100/40 
             p-2
             mx-2flex flex-col items-center
@@ -64,7 +67,7 @@ export function Card({
         transition={{ ease: `easeIn`, duration: 0.8 }}
         className="  bg-slate-950/30  flex flex-col  justify-end p-2"
       >
-        <div className="bg-transparent px-2  hover:text-white  text-white/70 ">
+        <div className="bg-transparent bg-linear-to-b from-cyan-100 via-blue-100 to-cyan-100 bg-clip-text text-transparent px-2  ">
           <p className=" pb-2 font-semibold max-w-[40ch] ">{title || name}</p>
           <div className="flex justify-between items-center px-2 font-semibold text-xs">
             <span className="uppercase">
@@ -73,7 +76,7 @@ export function Card({
 
             <Link to={`/${src}/${id}`} state={{ id: id }}>
               <span onClick={() => {}}>
-                <Info className="w-4" />
+                <Info className="w-4 " color="#ffff" />
               </span>
             </Link>
           </div>

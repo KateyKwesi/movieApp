@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MovieIdInfo } from "./movieInfo";
+import { MovieIdInfo } from "./MOVIE/movieInfo";
 import { Star, Calendar, Play, Info } from "lucide-react";
 import { genreData } from "./genre";
 import { useQuery } from "@tanstack/react-query";
@@ -105,7 +105,7 @@ export function Hero() {
                 alt={`${popularMovie?.results[count]?.title}`}
               />
             </div>
-            <div className="mb-1 flex gap-3">
+            <div className="mb-1 flex gap-3 flex-wrap">
               <div className=" bg-white/10 border border-white/30 px-2  rounded-full transition-all duration-300 ease-in-out hover:bg-white/30 shadow-lg text-white flex gap-1.5 items-center">
                 <Star color="#ffdd00" className="fill-amber-300 w-3" />
                 <span className="text-xs">
@@ -136,7 +136,7 @@ export function Hero() {
                   <span>
                     <Play className="fill-white w-4" />
                   </span>
-                  <span className="font-semibold">PLAY</span>
+                  <span className=" font-body">PLAY</span>
                 </button>
               </div>
               <div>

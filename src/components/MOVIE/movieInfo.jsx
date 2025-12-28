@@ -200,14 +200,13 @@ export const MovieIdInfo = () => {
           </div>
         </div>
         <div>
-          //second div
-          <div className=" h-full md:ml-8">
+          <div className=" h-full md:ml-8  ">
             <div className="pt-2  ">
-              <p className="text-slate-300 font-semibold text-xl max-w-[30ch] mb-4 md:text-3xl md:font-black  ">
+              <h1 className="text-slate-300 font-semibold text-xl max-w-[30ch] mb-4 md:text-3xl md:font-black  ">
                 {MovieInfo?.original_title}
-              </p>
+              </h1>
             </div>
-            <div className="text-slate-400 flex gap-1 flex flex-wrap text-sm ">
+            <div className="text-slate-400 flex gap-1  flex-wrap text-sm  ">
               <span className=" bg-white text-black font-semibold border border-amber-50/10 rounded-md px-2 h-7 py-1 backdrop-blur-lg shadow-2xl">
                 Movie
               </span>
@@ -215,7 +214,7 @@ export const MovieIdInfo = () => {
                 <Star color="#ffdd00" className="fill-amber-300 w-4" />
                 {MovieInfo?.vote_average.toFixed(1)}
               </span>
-              <span className="flex gap-2">
+              <span className="flex gap-2 flex-wrap">
                 {MovieInfo?.genres.map((genre, index) => (
                   <span
                     key={index}
@@ -228,9 +227,9 @@ export const MovieIdInfo = () => {
             </div>
             <div>
               <div className="mt-5">
-                <p className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
+                <h1 className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
                   Overview
-                </p>
+                </h1>
                 <div className="h-[200px] overflow-auto  bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
                   <p className="text-slate-400 p-4  max-w-[80ch] leading-relaxed">
                     {MovieInfo?.overview}
@@ -238,20 +237,19 @@ export const MovieIdInfo = () => {
                 </div>
               </div>
             </div>
-          </div>{" "}
-          //div 2 ending
+          </div>
         </div>
 
-        <div className="ml-5 mb-10 px-6">
-          <iframe
-            className="w-[450px] h-70 md:w-[600px] h-[400px]"
-            width="600"
-            height="450"
-            src={`https://www.youtube.com/embed/${Trailer?.key}?autoplay=1&controls=0&mute=`}
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
-        </div>
+        {Trailer && (
+          <div className="ml-5 mb-10 xl:px-6   self-center  w-full xl:min-w-150 xl:max-w-150  xl:self-start  ">
+            <iframe
+              className="w-full sm:h-100  "
+              src={`https://www.youtube.com/embed/${Trailer?.key}?autoplay=1&controls=0&mute=`}
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+        )}
       </div>
     </div>
   );

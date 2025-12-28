@@ -18,7 +18,7 @@ export function Header() {
       >
         {[
           { label: "HOME", to: "/" },
-          { label: "MOVIE", to: "/movie" },
+          { label: "MOVIE", to: "/movies" },
           { label: "TV", to: "/tv" },
         ].map((item) => (
           <Link key={item.label} to={item.to}>

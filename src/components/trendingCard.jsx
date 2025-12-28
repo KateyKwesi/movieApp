@@ -33,9 +33,9 @@ export const TrendingCard = () => {
   return (
     <div className="max-w-7xl mx-auto flex flex-col  justify-center overflow-hidden">
       <div className="text-amber-50">
-        <p className="text-slate-400 font-semibold text-xl mb-5 p-2 border-b-amber-50/20 border-b">
-          TRENDING
-        </p>
+        <h1 className="inline-block text-white text-2xl tracking-widest  font-semibold  m-5 border-b-4 border-slate-800">
+          TRENDING NOW
+        </h1>
       </div>
       <div className="text-white w-full  overflow-hidden">
         {trendingIsLoading ? (

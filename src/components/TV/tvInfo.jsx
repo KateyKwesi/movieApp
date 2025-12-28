@@ -14,7 +14,7 @@ import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import Avatar from "react-avatar";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useState } from "react";
-import { genreData } from "./genre";
+import { genreData } from "../genre";
 
 export const TVIdInfo = () => {
   const TOKEN = import.meta.env.VITE_TMDB_API_KEY;
@@ -35,7 +35,6 @@ export const TVIdInfo = () => {
 
     return `${hours}h ${minutes}m ${seconds}s`;
   }
-  console.log(id);
   const fetchMovieBackdrop = async ({ queryKey }) => {
     const [, movieId] = queryKey;
     if (!movieId) throw new Error("Movie ID is missing");
@@ -197,7 +196,7 @@ export const TVIdInfo = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${Moviebackdrops?.backdrops[3].file_path})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${Moviebackdrops?.backdrops[3]?.file_path})`,
           }}
         />
 
@@ -218,7 +217,7 @@ export const TVIdInfo = () => {
           } flex justify-center flex-col  `}
         >
           <img
-            src={`https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1].file_path}`}
+            src={`https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1]?.file_path}`}
             alt=""
           />
           <div className={`text-white w-full  flex-col `}>
@@ -302,12 +301,11 @@ export const TVIdInfo = () => {
           </div>
         </div>
         <div>
-          //second div
           <div className=" h-full md:ml-8 ">
             <div className="pt-2  ">
-              <p className="text-slate-300 font-semibold text-xl max-w-[30ch] mb-4 md:text-3xl md:font-black  ">
-                {TVInfo?.original_title}
-              </p>
+              <h1 className="text-slate-300 font-semibold text-xl max-w-[30ch] mb-4 md:text-3xl md:font-black  ">
+                {TVInfo?.original_name}
+              </h1>
             </div>
             <div className="text-slate-400 flex gap-1 w-full flex flex-wrap text-sm ">
               <span className=" bg-white text-black font-semibold border border-amber-50/10 rounded-md px-2 h-7 py-1 backdrop-blur-lg shadow-2xl">
@@ -321,9 +319,9 @@ export const TVIdInfo = () => {
             </div>
             <div>
               <div className="mt-5 ">
-                <p className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
+                <h1 className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
                   Overview
-                </p>
+                </h1>
                 <div className="h-[200px] overflow-auto bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
                   <p className="text-slate-400 p-4  max-w-[80ch] leading-relaxed">
                     {TVInfo?.overview}

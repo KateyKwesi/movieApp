@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MovieSearch } from "./movieSearch";
-import { TvSearch } from "./tvSearch";
+import { MovieSearch } from "./MOVIE/movieSearch";
+import { TvSearch } from "./TV/tvSearch";
 import { SearchIcon } from "lucide-react";
 
 export const Search = () => {
@@ -9,7 +9,7 @@ export const Search = () => {
   return (
     <div>
       <div>
-        <div className="pt-50 flex justify-center pb-10">
+        <div className="pt-50 flex justify-center pb-10 mx-auto w-[80vw]">
           <div
             className="
       relative flex items-center
@@ -44,7 +44,7 @@ export const Search = () => {
         </div>
       </div>
       ;
-      <div className="flex  flex-col gap-16">
+      <div className="flex  flex-col ">
         <MovieSearch search={searchTerm} />
         <TvSearch search={searchTerm} />
       </div>

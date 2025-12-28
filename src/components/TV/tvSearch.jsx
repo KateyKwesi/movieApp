@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Card } from "./Card";
+import { Card } from "../Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useNavigate } from "react-router-dom";
@@ -34,12 +34,16 @@ export const TvSearch = ({ search }) => {
   };
 
   return (
-    <div>
+    <div
+      className="
+    "
+    >
       {search && (
-        <div className="mx-5">
-          <p className="text-slate-400 font-semibold text-2xl mb-2 border-b-amber-50/20 border-b">
-            TV <span className="italic text-amber-50">results</span>
-          </p>
+        <div className="mx-5 ">
+          <h1 className="inline-block text-slate-400 text-2xl tracking-widest  font-semibold  m-5 border-b-4 border-slate-800">
+            TV
+            <span className="italic text-white pl-2">RESULTS</span>
+          </h1>
         </div>
       )}
       {SearchTV?.results && (

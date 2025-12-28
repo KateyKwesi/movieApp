@@ -1,19 +1,18 @@
 import { motion } from "framer-motion";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Card } from "./Card";
-import { fetchTv } from "./fetchMovies";
+import { Card } from "../Card";
+import { MovieUpComing } from "../fetchMovies";
 import { useQuery } from "@tanstack/react-query";
-import { TVIdInfo } from "./tvInfo";
 import { useNavigate } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-export const TVCard = () => {
+export const Upcomingmovies = () => {
   const navigate = useNavigate();
 
-  const { data: tvDiscover, isLoading } = useQuery({
-    queryKey: ["tv-discover"],
-    queryFn: fetchTv,
+  const { data: Moviesupcoming, isLoading } = useQuery({
+    queryKey: ["movies-upcoming"],
+    queryFn: MovieUpComing,
   });
 
   if (isLoading)
@@ -34,18 +33,18 @@ export const TVCard = () => {
   return (
     <div className="max-w-7xl mx-auto flex flex-col  justify-center overflow-hidden">
       <div className="text-amber-50">
-        <p className="text-slate-400 font-semibold text-xl mb-5 p-2 border-b-amber-50/20 border-b">
-          TV SHOWS
-        </p>
+        <h1 className="inline-block text-white text-2xl tracking-widest  font-semibold  m-5 border-b-4 border-slate-800">
+          UPCOMING / NEW RELEASE
+        </h1>
       </div>
       <div className="text-white w-full  overflow-hidden">
         <Carousel responsive={responsive} infinite itemClass="px-2">
-          {tvDiscover?.results?.map((movie) => (
+          {Moviesupcoming?.results?.map((movie) => (
             <motion.div key={movie.id} layout>
               <Card
                 {...movie}
-                src={`tvInfo`}
-                click={() => navigate(`/tvInfo/${movie.id}`)}
+                src={`movieInfo`}
+                click={() => navigate(`/watch/${movie.id}`)}
               />
             </motion.div>
           ))}
