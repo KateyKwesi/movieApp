@@ -106,7 +106,7 @@ export const TVIdInfo = () => {
   } = useQuery({
     queryKey: ["movieBackdrops", id],
     queryFn: fetchMovieBackdrop,
-    enabled: !!id, // only run when id exists
+    enabled: !!id,
   });
 
   const {
@@ -116,7 +116,7 @@ export const TVIdInfo = () => {
   } = useQuery({
     queryKey: ["tvInfo", id],
     queryFn: fetchTvInfo,
-    enabled: !!id, // only run when id exists
+    enabled: !!id,
   });
 
   const {
@@ -126,7 +126,7 @@ export const TVIdInfo = () => {
   } = useQuery({
     queryKey: ["tvEpisodeInfo", seasonColor],
     queryFn: fetchTvEpisodeInfo,
-    enabled: !!TVInfo, // only run when id exists
+    enabled: !!TVInfo,
   });
 
   const {
@@ -136,7 +136,7 @@ export const TVIdInfo = () => {
   } = useQuery({
     queryKey: ["TVTrailer", TVInfo?.id],
     queryFn: fetchTVTrailer,
-    enabled: !!TVInfo, // only run when id exists
+    enabled: !!TVInfo,
   });
   const handleLoading = () => {
     if (TVTrailerLoading || MovieInfoLoading || MoviebackdropsLoading) {

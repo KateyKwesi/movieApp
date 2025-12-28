@@ -18,7 +18,7 @@ function WatchTV() {
       <IframeResizer
         className="relative z-50"
         log="collapsed"
-        src={`https://fmovies4u.com/embed/tmdb-tv-${id}/${season}/${episode}?autoPlay=true`}
+        src={`https://www.vidking.net/embed/tv/${id}/${season}/${episode}?color=9146ff&autoPlay=true&nextEpisode=true&episodeSelector=true`}
         style={{ width: "100%", height: "100vh" }}
         onLoad={() => setLoading(false)}
       />

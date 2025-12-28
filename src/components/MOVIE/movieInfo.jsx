@@ -106,17 +106,6 @@ export const MovieIdInfo = () => {
     queryFn: fetchMovieTrailer,
     enabled: !!id, // only run when id exists
   });
-  const handleLoading = () => {
-    if (MovieTrailerLoading || MovieInfoLoading || MoviebackdropsLoading) {
-      return (
-        <DotLottieReact
-          src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
-          loop
-          autoplay
-        />
-      );
-    }
-  };
 
   const Trailer = MovieTrailer?.results.find(
     (trailer) => trailer.name === "Official Trailer"
@@ -124,7 +113,6 @@ export const MovieIdInfo = () => {
   return (
     <div className="min-h-screen bg-slate-950 overflow-hidden">
       <div className="relative h-[80vh] md:h-[80vh] w-full overflow-hidden">
-        {handleLoading()}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{

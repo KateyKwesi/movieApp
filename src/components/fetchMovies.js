@@ -209,3 +209,175 @@ export const MovieWestern = async () => {
   );
   return res.data;
 };
+
+//tv section
+
+export const TopTv = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TrendingTv = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const popularTv = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/tv/popular?language=en-US",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const airingTv = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/tv/airing_today?language=en-US",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const onairTv = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/tv/on_the_air?language=en-US",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+//genre
+
+export const TvActionAdventure = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10759",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvAnimation = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=16",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvComedy = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=35",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvCrime = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=80",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvDocumentary = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=99",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvDrama = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=18",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvFamily = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10751",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvKids = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10762",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvMystery = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=9648",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvNews = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10763",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvReality = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10764",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvSciFiFantasy = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10765",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvSoap = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10766",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvTalk = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10767",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvWarPolitics = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=10768",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};
+
+export const TvWestern = async () => {
+  const res = await axios.get(
+    "https://api.themoviedb.org/3/discover/tv?with_genres=37",
+    { headers: { Authorization: `Bearer ${TOKEN}` } }
+  );
+  return res.data;
+};

@@ -18,7 +18,7 @@ function WatchMovie() {
 
       <IframeResizer
         className="relative z-50"
-        src={`https://fmovies4u.com/embed/tmdb-movie-${id}`}
+        src={`https://www.vidking.net/embed/movie/${id}?color=9146ff&autoPlay=true`}
         style={{ width: "100%", height: "100vh" }}
         log={false}
         checkOrigin={false}

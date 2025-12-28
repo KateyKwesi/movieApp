@@ -14,15 +14,6 @@ export const TrendingCard = () => {
     queryFn: allTrending,
   });
 
-  if (trendingIsLoading)
-    return (
-      <DotLottieReact
-        src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
-        loop
-        autoplay
-      />
-    );
-
   const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5.5 },
     desktop: { breakpoint: { max: 1024, min: 768 }, items: 4 },

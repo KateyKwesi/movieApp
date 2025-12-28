@@ -65,31 +65,32 @@ export function Hero() {
   const handleClicked = () => {
     navigate(`/watch/${movieId}`);
   };
+  const [fade, setFade] = useState(true);
+
   useEffect(() => {
     if (!popularMovie?.results) return;
 
     const interval = setInterval(() => {
-      setCount((prev) =>
-        prev + 1 < popularMovie.results.length ? prev + 1 : 0
-      );
+      setFade(false);
+
+      setTimeout(() => {
+        setCount((prev) =>
+          prev + 1 < popularMovie.results.length ? prev + 1 : 0
+        );
+        setFade(true);
+      }, 500);
     }, 10000);
 
     return () => clearInterval(interval);
   }, [popularMovie]);
 
-  if (popularLoading)
-    return (
-      <DotLottieReact
-        src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
-        loop
-        autoplay
-      />
-    );
   return (
-    <div className="min-h-screen bg-slate-950">
-      <div className="relative h-[80vh] md:h-[80vh] w-full overflow-hidden">
+    <div className="min-h-screen bg-slate-pattern">
+      <div className="relative h-[90vh] md:h-[90vh] w-full overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original/${popularMovie?.results[count]?.backdrop_path})`,
           }}
@@ -97,7 +98,7 @@ export function Hero() {
 
         <div className="absolute inset-0 bg-linear-to-b from-slate-950/20 via-slate-950/60 to-slate-950"></div>
         <div className=" w-full relative flex h-full items-end">
-          <div className="flex flex-col text-white  gap-5 px-5">
+          <div className="flex flex-col text-white  gap-8 px-5 md:px-8">
             <div className="">
               <img
                 className="max-w-80 w-30 px-2 sm:w-50"
@@ -121,7 +122,7 @@ export function Hero() {
               {handleGenre()}
             </div>
             <div className="">
-              <p className="text-xs sm:text:md md:text-lg lg:text:xl px-1 max-w-[60ch] overflow-hidden leading-relaxed">
+              <p className="text-xs sm:text:md md:text-lg font-light lg:text:xl px-1 max-w-[60ch] overflow-hidden leading-relaxed">
                 {popularMovie?.results[count].overview}
               </p>
             </div>

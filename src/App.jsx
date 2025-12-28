@@ -9,6 +9,10 @@ import WatchMovie from "./components/MOVIE/watchMovie.jsx";
 import WatchTV from "./components/TV/watchTV.jsx";
 import { MovieSearch } from "./components/MOVIE/movieSearch";
 import MovieSction from "./components/MOVIE/MovieSction.jsx";
+import TvSection from "./components/TV/tvSection.jsx";
+import disableDevtool from "disable-devtool";
+
+disableDevtool();
 
 function App() {
   return (
@@ -16,7 +20,7 @@ function App() {
       <div style={{ height: "100vh", width: "100vw", background: "#f0b100" }}>
         <Snowfall color="#0f172b" />
 
-        <div className="bg-slate-950 min-h-screen  ">
+        <div className="bg-slate-pattern min-h-screen  ">
           <Header />
 
           <Routes>
@@ -27,6 +31,7 @@ function App() {
             <Route path="/watch/:id" element={<WatchMovie />} />
             <Route path="/watch/:id/:season/:episode" element={<WatchTV />} />
             <Route path="/movies" element={<MovieSction />} />
+            <Route path="/tv" element={<TvSection />} />
           </Routes>
         </div>
       </div>

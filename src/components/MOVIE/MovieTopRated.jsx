@@ -14,15 +14,7 @@ export const TopRatedmovies = () => {
     queryKey: ["movies-toprated"],
     queryFn: MovieTop,
   });
-
-  if (isLoading)
-    return (
-      <DotLottieReact
-        src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
-        loop
-        autoplay
-      />
-    );
+  if (isLoading) return null;
 
   const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5.5 },
