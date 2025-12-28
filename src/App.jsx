@@ -11,6 +11,7 @@ import { MovieSearch } from "./components/MOVIE/movieSearch";
 import MovieSction from "./components/MOVIE/MovieSction.jsx";
 import TvSection from "./components/TV/tvSection.jsx";
 import disableDevtool from "disable-devtool";
+import Footer from "./components/Footer.jsx";
 
 disableDevtool();
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/movies" element={<MovieSction />} />
             <Route path="/tv" element={<TvSection />} />
           </Routes>
+          <Footer />
         </div>
       </div>
     </BrowserRouter>
