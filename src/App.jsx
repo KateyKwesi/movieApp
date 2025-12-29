@@ -34,7 +34,6 @@ function App() {
             <Route path="/movies" element={<MovieSction />} />
             <Route path="/tv" element={<TvSection />} />
           </Routes>
-          <Footer />
         </div>
       </div>
     </BrowserRouter>
