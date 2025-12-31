@@ -18,7 +18,7 @@ function WatchTV() {
       <IframeResizer
         className="relative z-50"
         log="collapsed"
-        src={`https://www.vidking.net/embed/tv/${id}/${season}/${episode}?color=9146ff&autoPlay=true&nextEpisode=true&episodeSelector=true`}
+        src={`https://player.vidplus.to/embed/tv/${id}/${season}/${episode}?autoplay=true&autonext=true&nextbutton=true&poster=true&title=true&download=true&watchparty=false&chromecast=true&episodelist=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
         style={{ width: "100%", height: "100vh" }}
         onLoad={() => setLoading(false)}
       />
