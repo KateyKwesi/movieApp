@@ -44,7 +44,9 @@ export const MovieSearch = ({ search }) => {
         <div className="mx-5">
           <h1 className="inline-block text-slate-400 text-2xl tracking-widest  font-semibold  m-5 border-b-4 border-slate-800">
             MOVIE
-            <span className="italic text-white pl-2">RESULTS</span>
+            <span className="italic text-white pl-2">
+              RESULTS {SearchMovie?.results.length}
+            </span>
           </h1>
         </div>
       )}

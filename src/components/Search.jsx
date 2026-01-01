@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MovieSearch } from "./MOVIE/movieSearch";
 import { TvSearch } from "./TV/tvSearch";
 import { SearchIcon } from "lucide-react";
 
+// Source - https://stackoverflow.com/a
+// Posted by HenryDev
+// Retrieved 2026-01-01, License - CC BY-SA 4.0
+
+function useDebounce(val, delay) {
+  const [debounceValue, setDebounceValue] = useState(val);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounceValue(val);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [val, delay]);
+  return debounceValue;
+}
+
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState(``);
-
+  const DebounceSearch = useDebounce(searchTerm, 2000);
   return (
     <div>
       <div>
@@ -45,8 +63,8 @@ export const Search = () => {
       </div>
       ;
       <div className="flex  flex-col ">
-        <MovieSearch search={searchTerm} />
-        <TvSearch search={searchTerm} />
+        <MovieSearch search={DebounceSearch} />
+        <TvSearch search={DebounceSearch} />
       </div>
     </div>
   );
