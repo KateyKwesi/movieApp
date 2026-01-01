@@ -23,7 +23,7 @@ function useDebounce(val, delay) {
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState(``);
-  const DebounceSearch = useDebounce(searchTerm, 2000);
+  const DebounceSearch = useDebounce(searchTerm, 500);
   return (
     <div>
       <div>
