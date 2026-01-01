@@ -18,7 +18,7 @@ function WatchMovie() {
 
       <IframeResizer
         className="relative z-50"
-        src={`https://player.vidplus.to/embed/movie/${id}?autoplay=true&poster=true&title=true&download=true&watchparty=false&chromecast=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
+        src={`https://player.vidplus.to/embed/movie/${id}?autoplay=true&poster=true&title=true&watchparty=false&chromecast=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
         style={{ width: "100%", height: "100vh" }}
         log={false}
         checkOrigin={false}
