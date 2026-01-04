@@ -165,7 +165,7 @@ export const MovieIdInfo = () => {
       <div className="flex flex-col justify-center items-center  mx-auto xl:flex-row  gap-5 px-8 xl:items-start">
         <div className="flex justify-center flex-col">
           <img
-            src={`https://image.tmdb.org/t/p/original/https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1].file_path}`}
+            src={`https://image.tmdb.org/t/p/original/https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1]?.file_path}`}
             alt=""
           />
           <div className="text-white w-full flex-col ">
