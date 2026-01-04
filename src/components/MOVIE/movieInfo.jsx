@@ -162,7 +162,7 @@ export const MovieIdInfo = () => {
         <div className="absolute inset-0 bg-linear-to-b from-slate-950/20 via-slate-950/60 to-slate-950"></div>
         <div className=" w-full relative flex h-full items-end"></div>
       </div>
-      <div className="flex flex-col justify-center items-center w-full mx-auto xl:flex-row  gap-5 px-8 xl:items-start">
+      <div className="flex flex-col justify-center items-center  mx-auto xl:flex-row  gap-5 px-8 xl:items-start">
         <div className="flex justify-center flex-col">
           <img
             src={`https://image.tmdb.org/t/p/original/https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1].file_path}`}
@@ -242,18 +242,18 @@ export const MovieIdInfo = () => {
                 ))}
               </span>
             </div>
-            <div>
+            <div className="w-[80vw] xl:w-full">
               <div className="mt-5">
                 <h1 className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
                   Overview
                 </h1>
-                <div className="h-[200px] overflow-auto  bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
-                  <p className="text-slate-400 p-4  max-w-[80ch] leading-relaxed">
+                <div className="h-fit overflow-auto  bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
+                  <p className="text-slate-400 p-4 text-xs sm:text-[1rem] max-w-[80ch] leading-relaxed">
                     {MovieInfo?.overview}
                   </p>
                 </div>
               </div>
-              <div className="w-full mt-5 flex flex-col sm:flex-row sm:gap-3 justify-center gap-2">
+              <div className=" mt-5  flex flex-col sm:flex-row sm:gap-3 justify-center gap-2">
                 <div>
                   <Button
                     onClick={() => setDownload(true)}
