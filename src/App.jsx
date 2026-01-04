@@ -13,7 +13,7 @@ import TvSection from "./components/TV/tvSection.jsx";
 import disableDevtool from "disable-devtool";
 import Footer from "./components/Footer.jsx";
 
-//disableDevtool();
+disableDevtool();
 
 function App() {
   return (
