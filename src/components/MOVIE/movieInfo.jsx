@@ -308,13 +308,15 @@ export const MovieIdInfo = () => {
 
         {playtrailer && (
           <div className="fixed episode-scroll inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center ">
-            <div className="relative w-full h-full max-w-4xl max-h-96">
+            <div className="relative w-[80vw] h-[40vh] ">
               <iframe
-                className="w-full sm:h-100  "
-                src={`https://www.youtube.com/embed/${Trailer?.key}?autoplay=1&controls=0&mute=`}
-                frameborder="0"
-                allowfullscreen
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${Trailer?.key}?autoplay=1&controls=1&rel=0&modestbranding=1`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
               ></iframe>
+
               <button
                 onClick={() => setPlayTrailer(false)}
                 className="absolute top-2 z-80 right-2 text-white bg-gray-900 bg-opacity-70 p-2 rounded-full hover:bg-gray-800"
