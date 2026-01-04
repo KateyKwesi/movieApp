@@ -7,6 +7,9 @@ import {
   Info,
   Bookmark,
   ExternalLink,
+  Download,
+  Youtube,
+  X,
 } from "lucide-react";
 import { useLocation, Link, useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,6 +18,7 @@ import Avatar from "react-avatar";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useState } from "react";
 import { genreData } from "../genre";
+import YouTube from "react-youtube";
 
 export const TVIdInfo = () => {
   const TOKEN = import.meta.env.VITE_TMDB_API_KEY;
@@ -149,30 +153,58 @@ export const TVIdInfo = () => {
       );
     }
   };
-  const Seasons = () => {
-    return TVInfo?.seasons?.map((season, index) => {
-      return (
-        <Button
-          key={index}
-          onClick={() => {
-            setSeasonColor(season.season_number);
-          }}
-          variant={seasonColor === season.season_number ? `outline` : null}
-          className={`flex flex-col w-fit h-15 hover:cursor-pointer hover:bg-white hover:text-black ${
-            season.season_number === seasonColor
-              ? `bg-amber-50  text-black font-bold `
-              : `bg-white/5 text-slate-400`
-          }  `}
-        >
-          <span className="">{season.name}</span>
-          <span className="text-xs italic">
-            Total episodes {season.episode_count}
-          </span>
-        </Button>
-      );
-    });
+  const [download, setDownload] = useState(false);
+  const [selectedEpisode, setSelectedEpisode] = useState(null); // Track the selected episode
+
+  const handleDownloadClick = (episode) => {
+    setDownload(true);
+    setSelectedEpisode(episode);
   };
 
+  const closeDownload = () => {
+    setDownload(false);
+  };
+
+  const Seasons = () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div className="relative border border-[#e84661] rounded-md z-30">
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full flex justify-between items-center bg-white/5 text-slate-300 px-4 py-2 rounded-md hover:bg-white hover:text-black transition"
+        >
+          <span>
+            {
+              TVInfo?.seasons?.find((s) => s.season_number === seasonColor)
+                ?.name
+            }
+          </span>
+          <span className="text-xs ml-1">▼</span>
+        </button>
+        {open && (
+          <div className="absolute  mt-2 w-full rounded-md bg-slate-900 shadow-xl">
+            {TVInfo?.seasons?.map((season) => (
+              <div
+                key={season.season_number}
+                onClick={() => {
+                  setSeasonColor(season.season_number);
+                  setOpen(false);
+                }}
+                className={`px-4 py-2 cursor-pointer hover:bg-white/10 ${
+                  season.season_number === seasonColor
+                    ? "bg-white/15 text-white"
+                    : "text-slate-400"
+                }`}
+              >
+                {season.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
   const handleGenre = () => {
     const ids = TVInfo?.genres.map((id) => id.id);
 
@@ -182,7 +214,7 @@ export const TVIdInfo = () => {
       .map((genre, index) => (
         <span
           key={index}
-          className=" bg-blue-950/10 border  border-amber-50/10 rounded-md h-7 px-2 py-1 backdrop-blur-lg shadow-2xl"
+          className=" bg-[#2e0e13]/10 text-[#e0435e] border  border-amber-50/10 rounded-md h-7 px-2 py-1 backdrop-blur-lg shadow-2xl"
         >
           {genre.name}
         </span>
@@ -190,13 +222,13 @@ export const TVIdInfo = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 ">
-      <div className="relative h-[80vh] md:h-[80vh] w-full ">
+    <div className="min-h-screen  overflow-hidden ">
+      <div className="relative h-[40vh] md:h-[80vh] w-full ">
         {handleLoading()}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${Moviebackdrops?.backdrops[3]?.file_path})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${Moviebackdrops?.backdrops[1]?.file_path})`,
           }}
         />
 
@@ -204,194 +236,196 @@ export const TVIdInfo = () => {
         <div className=" w-full relative  flex h-full items-end"></div>
       </div>
       <div
-        className={`flex flex-col justify-center items-center mx-auto gap-5 px-8 
-  xl:flex-row xl:items-start
-  ${viewTrailer ? "xl:w-full" : "xl:w-7xl"}
+        className={`flex flex-col max-w-7xl md:text-3xl justify-center items-center mx-auto gap-5 px-8 
+  xl:flex-row xl:items-start w-full
 `}
       >
         <div
-          className={`${
-            TVTrailer?.results.length <= 0
-              ? `xl:min-w-65 xl:sticky xl:top-0`
-              : `min-w-55`
-          } flex justify-center flex-col  `}
+          className={`
+               xl:min-w-65 w-fit
+               flex justify-center flex-col  `}
         >
           <img
             src={`https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1]?.file_path}`}
             alt=""
           />
-          <div className={`text-white w-full  flex-col `}>
+          <div className="text-white w-full flex mt-2 flex-col space-y-4">
             <Button
               onClick={() => {
                 if (window.innerWidth <= 768) {
                   document
                     .getElementById("play")
-                    .scrollIntoView({ behavior: "smooth" });
+                    ?.scrollIntoView({ behavior: "smooth" });
                 } else {
                   navigate(`/watch/${TVInfo.id}/1/1`);
                 }
               }}
-              className="w-full bg-amber-50 text-slate-950 mb-3 py-5 border-white/10 hover:bg-amber-50 hover:text-gray-800 hover:border"
+              className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
             >
-              <Play className="fill-white w-4" />
-              Watch Now
+              <Play className=" w-6 h-6 " />
+              <span className="font-medium">Watch Now</span>
             </Button>
-            <Button
-              onClick={() => {
-                setViewTrailere((prev) => !prev);
 
-                if (window.innerWidth <= 768) {
-                  setTimeout(() => {
-                    document
-                      .getElementById("trailer")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }, 100);
-                } else {
-                  navigate(`/watch/${TVInfo.id}/1/1`);
-                }
-              }}
-              className="w-full bg-blue-950/10 font-semibold py-5 border-amber-50/10 hover:text-black hover:bg-yellow-500"
-              variant="outline"
-            >
-              <ExternalLink />
-              View Trailer
-            </Button>
+            <div className="text-white w-full flex flex-col space-y-4">
+              <Button
+                className="w-full bg-white text-black font-semibold py-5 rounded-lg border border-slate-500/30 shadow-md transition-all duration-300 ease-in-out hover:scale-105"
+                variant="outline"
+              >
+                <Youtube color="#000000" className=" w-6 h-6 " />
+                <span className="font-medium">Trailer</span>
+              </Button>
+            </div>
           </div>
-          <div className="text-white w-full mt-4 bg-blue-950/10 border border-amber-50/10 rounded-md backdrop-blur-lg shadow-2xl">
-            <div className="px-3 py-2">
-              <p className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
-                Basic Info
-              </p>
-              <div className="flex justify-between text-sm mt-4 text-slate-400">
-                <span>First-Air-Date</span>
-                <span>{TVInfo?.first_air_date}</span>
-              </div>
-              <div className="flex justify-between text-sm mt-4 text-slate-400">
-                <span>Last-Air-Date</span>
-                <span>{TVInfo?.last_air_date}</span>
-              </div>
-              <div className="flex justify-between text-sm mt-4 text-slate-400">
-                <span> Episodes</span>
-                <span>{TVInfo?.number_of_episodes}</span>
-              </div>
-              <div className="flex justify-between text-sm mt-4 text-slate-400">
-                <span>Seasons</span>
-                <span>{TVInfo?.number_of_seasons}</span>
-              </div>
-              <div className="flex justify-between items-center text-sm mt-4 text-slate-400">
-                <span>Rating</span>
-                <div className="flex flex-col items-center ">
-                  <Rating value={TVInfo?.vote_average / 2}>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <RatingButton
-                        size={6}
-                        className="text-yellow-500 text-7xl"
-                        key={index}
-                      />
-                    ))}
-                  </Rating>
-                </div>
-              </div>
 
-              <div className="flex justify-between text-sm mt-4 text-slate-400">
-                <span>Status</span>
-                <span>{TVInfo?.status}</span>
+          <div className="w-full text-xs mt-4 bg-slate-900/20 border border-slate-800/30 rounded-lg backdrop-blur-lg shadow-xl">
+            <div className="px-6 py-5">
+              <h1 className="text-slate-300 text-xl mb-4 font-semibold border-b-2 border-[#e84661] pb-2">
+                Info
+              </h1>
+
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-sm text-slate-300">
+                  <span className="font-medium text-slate-400">
+                    First Air Date
+                  </span>
+                  <span>{TVInfo?.first_air_date}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm text-slate-300">
+                  <span className="font-medium text-slate-400">
+                    Last Air Date
+                  </span>
+                  <span>{TVInfo?.last_air_date}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm text-slate-300">
+                  <span className="font-medium text-slate-400">Seasons</span>
+                  <span>{TVInfo?.number_of_seasons}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm text-slate-300">
+                  <span className="font-medium text-slate-400">Episodes</span>
+                  <span>{TVInfo?.number_of_episodes}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm text-slate-300">
+                  <span className="font-medium text-slate-400">Status</span>
+                  <span>{TVInfo?.status}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <div className=" h-full md:ml-8 ">
+          <div className=" h-full md:ml-18 ">
             <div className="pt-2  ">
-              <h1 className="text-slate-300 font-semibold text-xl max-w-[30ch] mb-4 md:text-3xl md:font-black  ">
+              <h1 className="text-slate-300 font-semibold text-xl  max-w-[30ch] mb-4 md:text-4xl md:font-black  ">
                 {TVInfo?.original_name}
               </h1>
             </div>
-            <div className="text-slate-400 flex gap-1 w-full flex flex-wrap text-sm ">
-              <span className=" bg-white text-black font-semibold border border-amber-50/10 rounded-md px-2 h-7 py-1 backdrop-blur-lg shadow-2xl">
-                TV SHOW
+            <div className="  gap-1 w-full  flex flex-wrap text-yellow-500 text-sm ">
+              <span className="   border border-amber-50/10 rounded-md px-2 h-7 py-1 backdrop-blur-lg shadow-2xl">
+                TV
               </span>
-              <span className="flex justify-center items-center gap-0.5  bg-blue-950/10 border h-7 border-amber-50/10 rounded-md px-2 py-1 backdrop-blur-lg shadow-2xl">
-                <Star color="#ffdd00" className="fill-amber-300 w-4" />
+              <span className="flex justify-center items-center text-xs  gap-0.5  bg-amber-400/10  border h-7 border-amber-50/10 rounded-md px-2 py-1 backdrop-blur-lg shadow-2xl">
+                <Star color="#ffdd00" className="fill-amber-300 w-2" />
                 {TVInfo?.vote_average.toFixed(1)}
               </span>
-              <span className="flex flex-wrap gap-2">{handleGenre()}</span>
+              <span className="flex flex-wrap mb-5 text-xs items-center justify-center gap-2">
+                {handleGenre()}
+              </span>
             </div>
             <div>
               <div className="mt-5 ">
                 <h1 className="text-slate-400 font-semibold text-xl mb-2 border-b-amber-50/20 border-b">
                   Overview
                 </h1>
-                <div className="h-[200px] overflow-auto bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
-                  <p className="text-slate-400 p-4  max-w-[80ch] leading-relaxed">
+                <div className="h-fit overflow-auto bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
+                  <p className="text-slate-400 p-4 text-xs md:text-[1rem]  max-w-[120ch] leading-relaxed">
                     {TVInfo?.overview}
                   </p>
                 </div>
               </div>
-              <div className="my-5   backdrop-blur-md">
-                <div className="flex gap-2 justify-center sm:justify-start flex-wrap">
+              <div
+                className={`my-5 ${
+                  !download ? `z-50` : ``
+                } relative    backdrop-blur-md`}
+              >
+                <div className="flex gap-2 relative  text-xs flex-wrap">
                   {Seasons()}
                 </div>
               </div>
               <div>
-                <div className="flex w-full flex-wrap gap-2 justify-center sm:justify-start">
-                  {TVEpisodeInfo?.episodes.map((detail, index) => {
-                    return (
+                <div className="flex w-full z-0 relative flex-wrap gap-2 justify-center sm:justify-start">
+                  <div className="max-h-150 w-full episode-scroll relative  overflow-y-auto divide-y divide-white/10">
+                    {TVEpisodeInfo?.episodes.map((detail, index) => (
                       <div
-                        id="play"
-                        onClick={() =>
-                          navigate(
-                            `/watch/${TVInfo.id}/${detail.season_number}/${detail.episode_number}`
-                          )
-                        }
                         key={index}
-                        className="relative text-amber-50 w-50 overflow-hidden hover:cursor-pointer"
+                        className="relative flex justify-between gap-3 items-center"
                       >
-                        <div className="relative hover:cursor-pointer">
-                          <img
-                            src={
-                              detail.still_path
-                                ? `https://image.tmdb.org/t/p/w200/${detail.still_path}`
-                                : `https://image.tmdb.org/t/p/original/${Moviebackdrops?.posters[3].file_path}`
-                            }
-                            alt=""
-                          />
-                          <div className="absolute bottom-0 backdrop-blur-lg bg-blue-950/10 font-semibold ">
-                            <span>{formatTime(detail.runtime)}</span>
+                        <div
+                          id="play"
+                          onClick={() =>
+                            navigate(
+                              `/watch/${TVInfo.id}/${detail.season_number}/${detail.episode_number}`
+                            )
+                          }
+                          className="group flex items-center   py-4 hover:bg-white/5 cursor-pointer transition"
+                        >
+                          <div className="w-6 text-xl text-slate-400 font-semibold">
+                            {detail.episode_number}
+                          </div>
+
+                          <div className="relative w-20  max-w-35 pr-2">
+                            <img
+                              className="rounded-md  object-cover"
+                              src={
+                                detail.still_path
+                                  ? `https://image.tmdb.org/t/p/w200/${detail.still_path}`
+                                  : `https://image.tmdb.org/t/p/original/${Moviebackdrops?.posters[3].file_path}`
+                              }
+                              alt=""
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0  ">
+                            <h3 className="text-white md:text-lg leading-relaxed ml-1 text-sm mb-1">
+                              {detail.name}
+                            </h3>
+                            <p className="text-sm md:text-md leading-relaxed text-slate-400  line-clamp-2">
+                              {detail.overview}
+                            </p>
                           </div>
                         </div>
-                        <div className="absolute w-full bg-slate-950/20   top-0 h-full"></div>
-
-                        <div className="absolute top-0 right-0 backdrop-blur-xl shadow-2xl bg-red-950">
-                          <span className="px-1 font-bold">{`S${detail.season_number}E${detail.episode_number}`}</span>
-                        </div>
-                        <div className="mb-3 text-slate-400 ">
-                          <span className=" line-clamp-2 italic">
-                            {detail.overview}
-                          </span>
+                        <div className="  px-3 ">
+                          <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
+                            <button onClick={() => handleDownloadClick(detail)}>
+                              <Download color="#e84661" />
+                            </button>
+                            {download && (
+                              <div className="fixed episode-scroll inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center ">
+                                <div className="relative w-full h-full max-w-4xl max-h-96">
+                                  <iframe
+                                    src={`https://dl.vidsrc.vip/tv/${TVInfo?.id}/${selectedEpisode.season_number}/${selectedEpisode.episode_number}`}
+                                    className="w-full relative z-80 h-full episode-scroll rounded-lg"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                  ></iframe>
+                                  <button
+                                    onClick={closeDownload}
+                                    className="absolute top-2 z-80 right-2 text-white bg-gray-900 bg-opacity-70 p-2 rounded-full hover:bg-gray-800"
+                                  >
+                                    <X color="#ffffff" />
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {TVTrailer?.results.length >= 1 && viewTrailer && (
-          <div
-            id="trailer"
-            className="ml-5 mb-10 xl:px-6   self-center  w-full xl:min-w-150 xl:max-w-150  xl:self-start  "
-          >
-            <iframe
-              className="w-full sm:h-100  "
-              src={`https://www.youtube.com/embed/${TVTrailer?.results[0]?.key}?autoplay=1&controls=0&mute=`}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
-        )}
       </div>
     </div>
   );

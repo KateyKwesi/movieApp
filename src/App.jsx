@@ -13,28 +13,24 @@ import TvSection from "./components/TV/tvSection.jsx";
 import disableDevtool from "disable-devtool";
 import Footer from "./components/Footer.jsx";
 
-disableDevtool();
+//disableDevtool();
 
 function App() {
   return (
     <BrowserRouter>
-      <div style={{ height: "100vh", width: "100vw", background: "#f0b100" }}>
-        <Snowfall color="#0f172b" />
+      <div className="bg-slate-pattern min-h-screen  ">
+        <Header />
 
-        <div className="bg-slate-pattern min-h-screen  ">
-          <Header />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/movieInfo/:id" element={<MovieIdInfo />} />
-            <Route path="/tvInfo/:id" element={<TVIdInfo />} />
-            <Route path="/watch/:id" element={<WatchMovie />} />
-            <Route path="/watch/:id/:season/:episode" element={<WatchTV />} />
-            <Route path="/movies" element={<MovieSction />} />
-            <Route path="/tv" element={<TvSection />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/movieInfo/:id" element={<MovieIdInfo />} />
+          <Route path="/tvInfo/:id" element={<TVIdInfo />} />
+          <Route path="/watch/:id" element={<WatchMovie />} />
+          <Route path="/watch/:id/:season/:episode" element={<WatchTV />} />
+          <Route path="/movies" element={<MovieSction />} />
+          <Route path="/tv" element={<TvSection />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

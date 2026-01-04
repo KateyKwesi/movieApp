@@ -56,7 +56,7 @@ export const MovieSearch = ({ search }) => {
             <Card
               {...movie}
               src={`movieInfo`}
-              click={() => navigate(`/watch/${movie.id}`)}
+              click={() => navigate(`/movieInfo/${movie.id}`)}
             />
           ))}
         </Carousel>

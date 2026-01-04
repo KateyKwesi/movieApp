@@ -37,7 +37,7 @@ export const Popularmovies = () => {
               <Card
                 {...movie}
                 src={`movieInfo`}
-                click={() => navigate(`/watch/${movie.id}`)}
+                click={() => navigate(`/movieInfo/${movie.id}`)}
               />
             </motion.div>
           ))}
