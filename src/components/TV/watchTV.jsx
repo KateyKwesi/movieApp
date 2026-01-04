@@ -15,15 +15,15 @@ function WatchTV() {
           </h1>
         </div>
       )}
-      <div className=" w-full h-[40vh]  ">
+      <div className="w-full player-wrap h-[40vh] min-h-[40vh] landscape:h-[100svh] landscape:min-h-[100svh]">
         <iframe
-          className="relative w-full h-full z-50"
+          className="w-full h-full"
           src={`https://player.vidplus.to/embed/tv/${id}/${season}/${episode}?autoplay=true&autonext=true&nextbutton=true&poster=true&title=true&watchparty=false&chromecast=true&episodelist=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
           onLoad={() => setLoading(false)}
-        ></iframe>
+        />
       </div>
     </div>
   );

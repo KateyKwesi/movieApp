@@ -137,6 +137,7 @@
     letter-spacing: 0.08em;
   }
 }
+
 @keyframes marquee {
   0% {
     transform: translateY(100%);
@@ -180,4 +181,16 @@
 .bg-slate-pattern {
   background-color: #020617; /* slate-950 */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill='%23475669' fill-opacity='0.12'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (orientation: landscape) {
+  .player-wrap {
+    height: 100vh;
+  }
+}
+
+@media (orientation: portrait) {
+  .player-wrap {
+    height: 50vh;
+  }
 }

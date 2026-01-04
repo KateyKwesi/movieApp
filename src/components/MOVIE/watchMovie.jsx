@@ -15,7 +15,7 @@ function WatchMovie() {
           </h1>
         </div>
       )}
-      <div className=" w-full h-[40vh]  ">
+      <div className="w-full player-wrap h-[40vh] min-h-[40vh] landscape:h-[100svh] landscape:min-h-[100svh]">
         <iframe
           className="relative w-full h-full z-50"
           src={`https://player.vidplus.to/embed/movie/${id}?autoplay=true&poster=true&title=true&watchparty=false&chromecast=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
