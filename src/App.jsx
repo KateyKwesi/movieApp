@@ -15,7 +15,7 @@ import Footer from "./components/Footer.jsx";
 import WatchMovie2 from "./components/MOVIE/watchMovie2.jsx";
 import WatchTV2 from "./components/TV/watchTV2.jsx";
 
-//disableDevtool();
+disableDevtool();
 
 function App() {
   return (
