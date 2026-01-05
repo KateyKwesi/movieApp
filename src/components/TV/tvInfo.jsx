@@ -10,6 +10,9 @@ import {
   Download,
   Youtube,
   X,
+  Zap,
+  Share,
+  Forward,
 } from "lucide-react";
 import { useLocation, Link, useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -144,17 +147,16 @@ export const TVIdInfo = () => {
   });
   const handleLoading = () => {
     if (TVTrailerLoading || MovieInfoLoading || MoviebackdropsLoading) {
-      return (
-        <DotLottieReact
-          src="https://lottie.host/e46b32c4-9a01-4db9-8d08-dd7aee566294/0UL52NAswZ.lottie"
-          loop
-          autoplay
-        />
-      );
+      return null;
     }
   };
+
   const [download, setDownload] = useState(false);
-  const [selectedEpisode, setSelectedEpisode] = useState(null); // Track the selected episode
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
+
+  const handleTrailer = () => {
+    return TVTrailer?.results[0]?.key;
+  };
 
   const handleDownloadClick = (episode) => {
     setDownload(true);
@@ -163,6 +165,11 @@ export const TVIdInfo = () => {
 
   const closeDownload = () => {
     setDownload(false);
+  };
+
+  const initialDownloadLink = {
+    season_number: 1,
+    episode_number: 1,
   };
 
   const Seasons = () => {
@@ -220,7 +227,8 @@ export const TVIdInfo = () => {
         </span>
       ));
   };
-
+  const [playtrailer, setPlayTrailer] = useState(false);
+  const [main, setMain] = useState(true);
   return (
     <div className="min-h-screen  overflow-hidden ">
       <div className="relative h-[40vh] md:h-[80vh] w-full ">
@@ -250,20 +258,9 @@ export const TVIdInfo = () => {
             alt=""
           />
           <div className="text-white w-full flex mt-2 flex-col space-y-4">
-            <Button
-              onClick={() => {
-                if (window.innerWidth <= 768) {
-                  document
-                    .getElementById("play")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  navigate(`/watch/${TVInfo.id}/1/1`);
-                }
-              }}
-              className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
-            >
-              <Play className=" w-6 h-6 " />
-              <span className="font-medium">Watch Now</span>
+            <Button className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl">
+              <Bookmark className=" w-6 h-6 " />
+              <span className="font-medium">BOOKMARK</span>
             </Button>
 
             <div className="text-white w-full flex flex-col space-y-4">
@@ -271,8 +268,8 @@ export const TVIdInfo = () => {
                 className="w-full bg-white text-black font-semibold py-5 rounded-lg border border-slate-500/30 shadow-md transition-all duration-300 ease-in-out hover:scale-105"
                 variant="outline"
               >
-                <Youtube color="#000000" className=" w-6 h-6 " />
-                <span className="font-medium">Trailer</span>
+                <Forward color="#000000" className=" w-6 h-6 " />
+                <span className="font-medium">SHARE</span>
               </Button>
             </div>
           </div>
@@ -342,6 +339,97 @@ export const TVIdInfo = () => {
                   </p>
                 </div>
               </div>
+              <div className="flex text-slate-300 mt-8 italic w-full justify-center">
+                <small className="text-sm">
+                  If the content is wrong or not working, please try switching
+                  to main 2
+                </small>
+              </div>
+              <div className=" mt-2  flex flex-col sm:flex-row sm:gap-3 justify-center gap-2">
+                <div>
+                  <Button
+                    onClick={() => {
+                      setMain(true);
+                    }}
+                    className={`w-full border ${
+                      main ? `bg-[#e84661]` : `bg-transparent`
+                    } active:bg-[#e84661] border-[#e84661]  hover:bg-transparent  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl`}
+                  >
+                    <Zap color="#ffffff" className=" w-6 h-6 " />
+                    <span className="font-medium">MAIN </span>
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    onClick={() => {
+                      setMain(false);
+                    }}
+                    className={`w-full border ${
+                      !main ? `bg-[#e84661]` : `bg-transparent`
+                    } active:bg-[#e84661] border-[#e84661]  hover:bg-transparent  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl`}
+                  >
+                    <Zap color="#ffffff" className=" w-6 h-6 " />
+                    <span className="font-medium">MAIN 2</span>
+                  </Button>
+                </div>
+                {download && (
+                  <div className="fixed episode-scroll inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center ">
+                    <div className="relative w-full h-full max-w-4xl max-h-96">
+                      <iframe
+                        src={`https://dl.vidsrc.vip/movie/${id}`}
+                        className="w-full relative z-80 h-full episode-scroll rounded-lg"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                      <button
+                        onClick={closeDownload}
+                        className="absolute top-2 z-80 right-2 text-white bg-gray-900 bg-opacity-70 p-2 rounded-full hover:bg-gray-800"
+                      >
+                        <X color="#ffffff" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <Button
+                    onClick={() => setPlayTrailer(true)}
+                    className="w-full border border-[#e84661] bg-transparent hover:bg-transparent  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
+                  >
+                    <Youtube color="#ffffff" className=" w-6 h-6 " />
+
+                    <span className="font-medium">TRAILER</span>
+                  </Button>
+                  {playtrailer && (
+                    <div className="fixed z-60 episode-scroll inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center ">
+                      <div className="relative w-[80vw] h-[40vh] sm:w-[50vw] sm:h-[50vh] ">
+                        <iframe
+                          className="w-full h-full"
+                          src={`https://www.youtube.com/embed/${handleTrailer()}?autoplay=1&controls=1&rel=0&modestbranding=1`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                          allowFullScreen
+                        ></iframe>
+
+                        <button
+                          onClick={() => setPlayTrailer(false)}
+                          className="absolute top-2 z-80 right-2 text-white bg-gray-900 bg-opacity-70 p-2 rounded-full hover:bg-gray-800"
+                        >
+                          <X color="#ffffff" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <Button
+                    onClick={() => handleDownloadClick(initialDownloadLink)}
+                    className="w-full bg-transparent border-[#e84661] border  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
+                  >
+                    <Download className=" w-6 h-6 " />
+                    <span className="font-medium">DOWNLOAD</span>
+                  </Button>
+                </div>
+              </div>
               <div
                 className={`my-5 ${
                   !download ? `z-50` : ``
@@ -362,9 +450,13 @@ export const TVIdInfo = () => {
                         <div
                           id="play"
                           onClick={() =>
-                            navigate(
-                              `/watch/${TVInfo.id}/${detail.season_number}/${detail.episode_number}`
-                            )
+                            main === true
+                              ? navigate(
+                                  `/watch/${TVInfo.id}/${detail.season_number}/${detail.episode_number}`
+                                )
+                              : navigate(
+                                  `/watch/main2/${TVInfo.id}/${detail.season_number}/${detail.episode_number}`
+                                )
                           }
                           className="group flex items-center   py-4 hover:bg-white/5 cursor-pointer transition"
                         >

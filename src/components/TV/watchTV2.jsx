@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import IframeResizer from "@iframe-resizer/react";
 import { useParams } from "react-router-dom";
 
-function WatchTV() {
+function WatchTV2() {
   const { id, season, episode } = useParams();
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ function WatchTV() {
       <div className="w-full player-wrap h-[40vh] min-h-[40vh] landscape:h-[100svh] landscape:min-h-[100svh]">
         <iframe
           className="w-full h-full"
-          src={`https://player.vidplus.to/embed/tv/${id}/${season}/${episode}?autoplay=true&autonext=true&nextbutton=true&poster=true&title=true&watchparty=false&chromecast=true&episodelist=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
+          src={`https://www.vidking.net/embed/tv/${id}/${season}/${episode}?autoPlay=true&nextEpisode=true&episodeSelector=true`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
@@ -29,4 +29,4 @@ function WatchTV() {
   );
 }
 
-export default WatchTV;
+export default WatchTV2;

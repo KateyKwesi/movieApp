@@ -12,8 +12,10 @@ import MovieSction from "./components/MOVIE/MovieSction.jsx";
 import TvSection from "./components/TV/tvSection.jsx";
 import disableDevtool from "disable-devtool";
 import Footer from "./components/Footer.jsx";
+import WatchMovie2 from "./components/MOVIE/watchMovie2.jsx";
+import WatchTV2 from "./components/TV/watchTV2.jsx";
 
-disableDevtool();
+//disableDevtool();
 
 function App() {
   return (
@@ -27,7 +29,14 @@ function App() {
           <Route path="/movieInfo/:id" element={<MovieIdInfo />} />
           <Route path="/tvInfo/:id" element={<TVIdInfo />} />
           <Route path="/watch/:id" element={<WatchMovie />} />
+          <Route path="/movie/main2/:id" element={<WatchMovie2 />} />
+
           <Route path="/watch/:id/:season/:episode" element={<WatchTV />} />
+          <Route
+            path="/watch/main2/:id/:season/:episode"
+            element={<WatchTV2 />}
+          />
+
           <Route path="/movies" element={<MovieSction />} />
           <Route path="/tv" element={<TvSection />} />
         </Routes>

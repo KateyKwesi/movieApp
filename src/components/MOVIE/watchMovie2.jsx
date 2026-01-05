@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import IframeResizer from "@iframe-resizer/react";
 import { useParams } from "react-router-dom";
 
-function WatchTV() {
-  const { id, season, episode } = useParams();
+function WatchMovie2() {
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
 
   return (
@@ -17,16 +17,16 @@ function WatchTV() {
       )}
       <div className="w-full player-wrap h-[40vh] min-h-[40vh] landscape:h-[100svh] landscape:min-h-[100svh]">
         <iframe
-          className="w-full h-full"
-          src={`https://player.vidplus.to/embed/tv/${id}/${season}/${episode}?autoplay=true&autonext=true&nextbutton=true&poster=true&title=true&watchparty=false&chromecast=true&episodelist=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
+          className="relative w-full h-full z-60"
+          src={`https://www.vidking.net/embed/movie/${id}?color=e50914&autoPlay=true`} //{`https://player.vidplus.to/embed/movie/${id}?autoplay=true&poster=true&title=true&watchparty=false&chromecast=true&servericon=true&setting=true&pip=true&primarycolor=6C63FF&secondarycolor=9F9BFF&iconcolor=FFFFFF&font=Roboto&fontcolor=FFFFFF&fontsize=20&opacity=0.5`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
           onLoad={() => setLoading(false)}
-        />
+        ></iframe>
       </div>
     </div>
   );
 }
 
-export default WatchTV;
+export default WatchMovie2;

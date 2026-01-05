@@ -10,6 +10,8 @@ import {
   Download,
   Youtube,
   X,
+  Zap,
+  Forward,
 } from "lucide-react";
 import { useLocation, Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -168,30 +170,23 @@ export const MovieIdInfo = () => {
             src={`https://image.tmdb.org/t/p/original/https://image.tmdb.org/t/p/w300/${Moviebackdrops?.posters[1]?.file_path}`}
             alt=""
           />
-          <div className="text-white w-full flex-col ">
-            <Button
-              onClick={() => {
-                navigate(`/watch/${id}`);
-              }}
-              className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
-            >
-              <Play className="fill-white w-4" />
-              Watch Now
+          <div className="text-white w-full flex mt-2 flex-col space-y-4">
+            <Button className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl">
+              <Bookmark className=" w-6 h-6 " />
+              <span className="font-medium">BOOKMARK</span>
             </Button>
-            <Button
-              onClick={() =>
-                window.open(
-                  `https://www.imdb.com/title/${MovieInfo?.imdb_id}`,
-                  "_blank"
-                )
-              }
-              className="w-full bg-blue-950/10 font-semibold py-5 border-amber-50/10 hover:text-black hover:bg-yellow-500"
-              variant="outline"
-            >
-              <ExternalLink />
-              View on IMBD
-            </Button>
+
+            <div className="text-white w-full flex flex-col space-y-4">
+              <Button
+                className="w-full bg-white text-black font-semibold py-5 rounded-lg border border-slate-500/30 shadow-md transition-all duration-300 ease-in-out hover:scale-105"
+                variant="outline"
+              >
+                <Forward color="#000000" className=" w-6 h-6 " />
+                <span className="font-medium">SHARE</span>
+              </Button>
+            </div>
           </div>
+
           <div className="w-full text-xs mt-4 bg-slate-900/20 border border-slate-800/30 rounded-lg backdrop-blur-lg shadow-xl">
             <div className="px-6 py-5">
               <h1 className="text-slate-300 text-xl mb-4 font-semibold border-b-2 border-[#e84661] pb-2">
@@ -248,19 +243,38 @@ export const MovieIdInfo = () => {
                   Overview
                 </h1>
                 <div className="h-fit overflow-auto  bg-white/5  backdrop-blur-md rounded-xl border-white/5   transition-all duration-300 hover:border-blue-950 hover:border">
-                  <p className="text-slate-400 p-4 text-xs sm:text-[1rem] max-w-[80ch] leading-relaxed">
+                  <p className="text-slate-400 p-4 text-xs sm:text-[1rem] max-w-[120ch] leading-relaxed">
                     {MovieInfo?.overview}
                   </p>
                 </div>
               </div>
-              <div className=" mt-5  flex flex-col sm:flex-row sm:gap-3 justify-center gap-2">
+              <div className="flex text-slate-300 mt-8 italic w-full justify-center">
+                <small>
+                  If the content is wrong or not working, please try switching
+                  to main 2
+                </small>
+              </div>
+              <div className=" mt-2  flex flex-col sm:flex-row sm:gap-3 justify-center gap-2">
                 <div>
                   <Button
-                    onClick={() => setDownload(true)}
-                    className="w-full bg-[#e84661]  hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
+                    onClick={() => {
+                      navigate(`/watch/${id}`);
+                    }}
+                    className="w-full border border-[#e84661] active:bg-[#e84661]  bg-transparent hover:bg-transparent  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
                   >
-                    <Download className=" w-6 h-6 " />
-                    <span className="font-medium">DOWNLOAD</span>
+                    <Zap color="#ffffff" className=" w-6 h-6 " />
+                    <span className="font-medium">MAIN </span>
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    onClick={() => {
+                      navigate(`/movie/main2/${id}`);
+                    }}
+                    className="w-full border active:bg-[#e84661] border-[#e84661] bg-transparent hover:bg-transparent  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
+                  >
+                    <Zap color="#ffffff" className=" w-6 h-6 " />
+                    <span className="font-medium">MAIN 2</span>
                   </Button>
                 </div>
                 {download && (
@@ -290,7 +304,17 @@ export const MovieIdInfo = () => {
                     <span className="font-medium">TRAILER</span>
                   </Button>
                 </div>
+                <div>
+                  <Button
+                    onClick={() => setDownload(true)}
+                    className="w-full bg-[#e84661]   hover:bg-[#e84661]  mb-4 py-5 rounded-lg shadow-xl transition-transform duration-300 ease-in-out transform hover:scale-105 text-slate-100 hover:shadow-2xl"
+                  >
+                    <Download className=" w-6 h-6 " />
+                    <span className="font-medium">DOWNLOAD</span>
+                  </Button>
+                </div>
               </div>
+
               <div
                 className={`${
                   download === false ? `opacity-100` : `opacity-0`
@@ -308,7 +332,7 @@ export const MovieIdInfo = () => {
 
         {playtrailer && (
           <div className="fixed episode-scroll inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center ">
-            <div className="relative w-[80vw] h-[40vh] ">
+            <div className="relative w-[80vw] h-[40vh] sm:w-[50vw] sm:h-[50vh] ">
               <iframe
                 className="w-full h-full"
                 src={`https://www.youtube.com/embed/${Trailer?.key}?autoplay=1&controls=1&rel=0&modestbranding=1`}
