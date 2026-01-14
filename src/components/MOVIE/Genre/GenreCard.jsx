@@ -39,6 +39,7 @@ export const GenreCarousel = ({ title, queryKey, queryFn }) => {
                 {...movie}
                 src="movieInfo"
                 click={() => navigate(`/movieInfo/${movie.id}`)}
+                type="MOVIE"
               />
             </motion.div>
           ))}

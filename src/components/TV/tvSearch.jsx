@@ -55,6 +55,7 @@ export const TvSearch = ({ search }) => {
               {...movie}
               src={`tvInfo`}
               click={() => navigate(`/tvInfo/${movie.id}`)}
+              type="TV"
             />
           ))}
         </Carousel>

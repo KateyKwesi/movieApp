@@ -13,6 +13,7 @@ export function Card({
   name,
   src,
   click,
+  type,
 }) {
   const daysChildren = {
     hidden: { opacity: 0.8, y: 20 },
@@ -68,12 +69,16 @@ export function Card({
         className="  bg-slate-950/30  flex flex-col  justify-end p-2"
       >
         <div className="bg-transparent bg-linear-to-b from-cyan-100 via-blue-100 to-cyan-100 bg-clip-text text-transparent px-2  ">
-          <p className=" pb-2 font-semibold max-w-[40ch] ">{title || name}</p>
+          <p className=" pb-2 font-semibold  overflow-hidden">
+            {title || name}
+          </p>
           <div className="flex justify-between items-center px-2 font-semibold text-xs">
+            <small className=" text-yellow-500  text-xxs border-amber-50/10  backdrop-blur-lg shadow-2xl">
+              {type}
+            </small>
             <span className="uppercase">
               {release_date?.split(`-`)[0] || first_air_date?.split(`-`)[0]}
             </span>
-
             <Link to={`/${src}/${id}`} state={{ id: id }}>
               <span onClick={() => {}}>
                 <Info className="w-4 " color="#ffff" />

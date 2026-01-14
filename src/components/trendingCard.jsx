@@ -48,10 +48,11 @@ export const TrendingCard = () => {
                 <Card
                   {...movie}
                   src={movie.media_type === `movie` ? `movieInfo` : `tvInfo`}
+                  type={movie.media_type === `movie` ? `MOVIE` : `TV`}
                   click={() =>
                     navigate(
                       movie.media_type === `movie`
-                        ? `/watch/${movie.id}`
+                        ? `/movieInfo/${movie.id}`
                         : `/tvInfo/${movie.id}`
                     )
                   }

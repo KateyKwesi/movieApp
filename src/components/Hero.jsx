@@ -24,7 +24,7 @@ export function Hero() {
     );
     return res.data;
   };
-  const { data: popularMovie, isLoading: popularLoading } = useQuery({
+  const { data: popularMovie } = useQuery({
     queryKey: ["moviespopular", count],
     queryFn: popular,
   });

@@ -36,6 +36,7 @@ export const TVCard = ({ title, queryKey, queryFn }) => {
                   {...movie}
                   src={`tvInfo`}
                   click={() => navigate(`/tvInfo/${movie.id}`)}
+                  type="TV"
                 />
               </motion.div>
             ))}

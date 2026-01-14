@@ -37,6 +37,7 @@ export const MovieCardUpdated = ({ name, queryKey, queryFn }) => {
                 {...movie}
                 src={`movieInfo`}
                 click={() => navigate(`/movieInfo/${movie.id}`)}
+                type="MOVIE"
               />
             </motion.div>
           ))}

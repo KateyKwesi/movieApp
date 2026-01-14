@@ -38,6 +38,7 @@ export const MovieCard = ({ name }) => {
                 {...movie}
                 src={`movieInfo`}
                 click={() => navigate(`/movieInfo/${movie.id}`)}
+                type="MOVIE"
               />
             </motion.div>
           ))}

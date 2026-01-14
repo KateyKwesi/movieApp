@@ -57,6 +57,7 @@ export const MovieSearch = ({ search }) => {
               {...movie}
               src={`movieInfo`}
               click={() => navigate(`/movieInfo/${movie.id}`)}
+              type="MOVIE"
             />
           ))}
         </Carousel>
